@@ -30,6 +30,8 @@ export class stockReportDataModel {
     public afterDamagePrice?: number,
     public srcommission?: number,
     public afterSrCommission?: number,
+    public dsrcommission?: number,
+    public afterDsrCommission?: number,
     public reportDetails?: StockReportModel[]
   ) { }
 

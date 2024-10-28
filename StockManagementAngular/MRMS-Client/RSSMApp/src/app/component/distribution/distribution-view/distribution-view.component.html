@@ -125,9 +125,17 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #stockmenu="matMenu">
-                <button mat-menu-item (click)="confirmDelete(element.salesDistributeId)" disabled>
-                  <mat-icon color="warn">delete</mat-icon>
-                  <span>Delete</span>
+                <button mat-menu-item (click)="openExpenseDialog(element.salesDistributeId, expenseType.Damage)">
+                  <mat-icon>dialpad</mat-icon>
+                  <span>Damage Add</span>
+                </button>
+                <button mat-menu-item (click)="openExpenseDialog(element.salesDistributeId, expenseType.SrCommission)">
+                  <mat-icon>dialpad</mat-icon>
+                  <span>SrCommission Add</span>
+                </button>
+                <button mat-menu-item (click)="openExpenseDialog(element.salesDistributeId, expenseType.DsrCommission)">
+                  <mat-icon>dialpad</mat-icon>
+                  <span>DsrCommission Add</span>
                 </button>
               </mat-menu>
             </mat-cell>

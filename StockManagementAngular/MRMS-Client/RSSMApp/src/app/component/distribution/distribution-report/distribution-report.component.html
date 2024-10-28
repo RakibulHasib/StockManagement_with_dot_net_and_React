@@ -28,8 +28,9 @@
       <th>টাকা</th>
       <th>ফেরৎ</th>
       <th>টাকা</th>
+      <th>ডেমেজ</th>
       <th>বিক্রি</th>
-      <th>মোট বিক্রিত মূল্য</th>
+      <th style="width: 150px;">মোট বিক্রিত মূল্য</th>
     </tr>
     <tr class="text-center" *ngFor="let element of salesReportData?.reportDetails; let i = index">
       <td>{{ i + 1 }}</td>
@@ -39,6 +40,7 @@
       <td>{{ (element.receiveQuantity || 0) * (element.price || 0) }}</td>
       <td>{{ element.returnQuantity }}</td>
       <td>{{ (element.returnQuantity || 0) * (element.price || 0) }}</td>
+      <td>{{ element.damageQuantity }}</td>
       <td>{{ element.salesQuantity }}</td>
       <td>{{ element.totalSalesPrice }}</td>
     </tr>
@@ -49,6 +51,30 @@
       <td class="text-center" style="text-decoration: underline double; text-decoration-color: black;">{{ totalReturnPrice }}</td>
       <td></td>
       <td class="text-center" style="text-decoration: underline double; text-decoration-color: black;">{{ totalSalesAmount }}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="salesReportData">
+      <td colspan="9" style="text-align:right;border-bottom-style: hidden;">(-)&nbsp;ড্যামেজ মূল্যঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden; text-align: center;">{{salesReportData.damageAmount}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="salesReportData">
+      <td colspan="9" style="text-align:right;border-bottom-style: hidden;">মোট মূল্যঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden; text-align: center;">{{salesReportData.afterDamagePrice}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="salesReportData">
+      <td colspan="9" style="text-align:right;border-bottom-style: hidden;">(-)&nbsp;এস/আর কমিশনঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden; text-align: center;">{{salesReportData.srcommission}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="salesReportData">
+      <td colspan="9" style="text-align:right;border-bottom-style: hidden;">মোট মূল্যঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden; text-align: center;">{{salesReportData.afterSrCommission}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="salesReportData">
+      <td colspan="9" style="text-align:right;border-bottom-style: hidden;">(-)&nbsp;ডি/এস/আর কমিশনঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden; text-align: center;">{{salesReportData.dsrcommission}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="salesReportData">
+      <td colspan="9" style="text-align:right;">নিট মূল্যঃ &nbsp;</td>
+      <td style="text-decoration: underline double; text-decoration-color: black; text-align: center;">{{salesReportData.afterDsrCommission}}</td>
     </tr>
   </table>
 

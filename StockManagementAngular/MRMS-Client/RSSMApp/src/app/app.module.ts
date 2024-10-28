@@ -20,7 +20,6 @@ import { SignInComponent } from './component/Authentication/sign-in/sign-in.comp
 import { RegisterComponent } from './component/Authentication/register/register.component';
 import { StockViewComponent } from './component/stock/stock-view/stock-view.component';
 import { StockCreateComponent } from './component/stock/stock-create/stock-create.component';
-import { ProductItemComponent } from './component/shared/product-item/product-item.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { ProductRepeatComponent } from './component/shared/product-repeat/product-repeat.component';
@@ -33,8 +32,6 @@ import { DistributionConfigComponent } from './component/distribution/distributi
 import { FormlyMatToggleModule } from '@ngx-formly/material/toggle';
 import { DistributionReportComponent } from './component/distribution/distribution-report/distribution-report.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { DamageaddComponent } from './component/modal/damageadd/damageadd.component';
-import { CommisionaddComponent } from './component/modal/commisionadd/commisionadd.component';
 import { ConcernViewComponent } from './component/concernPerson/concern-view/concern-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -44,6 +41,7 @@ import { DistributionStatusComponent } from './component/shared/distribution-sta
 import { AuthInterceptor } from './component/Interceptor/auth.interceptor';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ExpenseModalComponent } from './component/modal/expense-modal/expense-modal.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +53,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SignInComponent,
     StockViewComponent,
     StockCreateComponent,
-    ProductItemComponent,
     ProductRepeatComponent,
     CompanyViewComponent,
     ProductViewComponent,
@@ -65,8 +62,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DistributionCreateComponent,
     DistributionConfigComponent,
     DistributionReportComponent,
-    DamageaddComponent,
-    CommisionaddComponent,
+    ExpenseModalComponent,
     ConcernViewComponent,
     RegisterComponent,
     UserviewComponent,

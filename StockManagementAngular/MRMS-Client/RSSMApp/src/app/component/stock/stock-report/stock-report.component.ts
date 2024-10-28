@@ -212,8 +212,12 @@ export class StockReportComponent implements OnInit {
               { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.stockReportData.srcommission}`], bold: true, margin: [25, 0, 0, 0]},
             ],
             [
+              { text: '(-) ডি/এস/আর কমিশনঃ', font: 'Kalpurush', fontSize: 12, bold: true },
+              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.stockReportData.dsrcommission}`], bold: true, margin: [25, 0, 0, 0]},
+            ],
+            [
               { text: 'নিট মূল্যঃ', font: 'Kalpurush', fontSize: 12, bold: true },
-              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.stockReportData.afterSrCommission}`], bold: true },
+              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.stockReportData.afterDsrCommission}`], bold: true },
             ],
           ],
         },

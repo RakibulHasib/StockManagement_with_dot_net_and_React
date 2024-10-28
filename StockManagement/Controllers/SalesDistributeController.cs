@@ -1,4 +1,6 @@
 ﻿using StockManagement.Helpers;
+using StockManagement.Services;
+using static StockManagement.Services.SalesDistributeService;
 
 namespace StockManagement.Controllers
 {
@@ -60,6 +62,20 @@ namespace StockManagement.Controllers
         public async Task<ActionResult<List<ProductInfoByConcernPersonDTO>>> GetProductInfoByCompany(int companyId)
         {
             return Ok(await _salesDistributeService.GetProductInfoByCompany(companyId));
+        }
+
+        [JwtAuthorize]
+        [HttpPut("UpdateExpenseAmount")]
+        public async Task<ActionResult<int>> UpdateExpenseAmount(int salesDistributeId, decimal amount, ExpenseType expenseType)
+        {
+            return Ok(await _salesDistributeService.UpdateExpenseAmount(salesDistributeId, amount, expenseType));
+        }
+
+        [JwtAuthorize]
+        [HttpGet("GetExpenseAmountByID/{salesDistributeId}/{expenseType}")]
+        public async Task<ActionResult<decimal>> GetExpenseAmountByID(int salesDistributeId, ExpenseType expenseType)
+        {
+            return await _salesDistributeService.GetExpenseAmountByID(salesDistributeId, expenseType);
         }
     }
 }

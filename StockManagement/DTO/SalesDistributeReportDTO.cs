@@ -6,6 +6,12 @@
         public string? ConcernPerson { get; set; }
         public string? CompanyName { get; set; }
         public DateTime CreationTime { get; set; }
+        public decimal? DamageAmount { get; set; }
+        public decimal? AfterDamagePrice { get; set; }
+        public decimal? Srcommission { get; set; }
+        public decimal? AfterSrCommission { get; set; }
+        public decimal? Dsrcommission { get; set; }
+        public decimal? AfterDsrCommission { get; set; }
         public List<SalesDistributeReportDetail>? reportDetails { get; set; }
     }
 
@@ -22,6 +28,7 @@
         public decimal ReturnPrice { get; set; }
         public int SalesQuantity { get; set; }
         public decimal TotalSalesPrice { get; set; }
+        public int? DamageQuantity { get; set; }
         public DateTime CreationTime { get; set; }
     }
 }

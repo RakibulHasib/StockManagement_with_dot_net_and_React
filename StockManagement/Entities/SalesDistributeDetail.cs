@@ -15,5 +15,6 @@ namespace StockManagement.Entities
         public decimal TotalSalesPrice { get; set; }
         public DateTime CreationTime { get; set; }
         public int IsDeleted { get; set; }
+        public int? DamageQuantity { get; set; }
     }
 }

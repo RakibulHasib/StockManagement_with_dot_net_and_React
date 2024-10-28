@@ -17,5 +17,7 @@ namespace StockManagement.Entities
         public int IsDeleted { get; set; }
         public decimal DamageAmount { get; set; }
         public decimal Srcommission { get; set; }
+        public decimal Dsrcommission { get; set; }
+        public string? DistributionIds { get; set; }
     }
 }

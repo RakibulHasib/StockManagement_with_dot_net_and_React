@@ -153,6 +153,7 @@ export class DistributionCreateComponent implements OnInit {
             stock: x.stock,
             receiveQuantity: 0,
             salesQuantity: 0,
+            damageQuantity: 0
           }));
 
           if (this.formData.length === 0) this.resetDistributionDate();
@@ -416,6 +417,17 @@ export class DistributionCreateComponent implements OnInit {
                     },
                   });
                 },
+              },
+            },
+            {
+              className: 'price mdc-hide-focus-outline flex-1 width-80',
+              type: 'input',
+              key: 'damageQuantity',
+              props: {
+                label: 'ডেমেজ',
+                floatLabel: 'always',
+                appearance: 'outline',
+                hideRequiredMarker: true
               },
             },
           ],

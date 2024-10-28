@@ -11,6 +11,8 @@
         public decimal? AfterDamagePrice { get; set; }
         public decimal? Srcommission { get; set; }
         public decimal? AfterSrCommission { get; set; }
+        public decimal? Dsrcommission { get; set; }
+        public decimal? AfterDsrCommission { get; set; }
         public List<ReportDetail>? reportDetails { get; set; }
     }
     public class ReportDetail

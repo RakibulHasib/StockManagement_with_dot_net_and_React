@@ -201,9 +201,54 @@ export class DistributionReportComponent {
         { text: 'টাকা',  bold: true, font: 'Adorsholipi', alignment: 'right' },
         { text: 'ফেরৎ',  bold: true, font: 'Adorsholipi', alignment: 'right' },
         { text: 'টাকা',  bold: true, font: 'Adorsholipi', alignment: 'right' },
+        { text: 'ড্যামেজ',  bold: true, font: 'Adorsholipi', alignment: 'right' },
         { text: 'বিক্রয়',  bold: true, font: 'Adorsholipi', alignment: 'right' },
         { text: 'টাকা',  bold: true, font: 'Adorsholipi', alignment: 'right' }
       ]
+    ];
+
+    const invoiceFooter: any = [
+      { width: '*', text: '' },
+      {
+        width: 'auto',
+        table: {
+          body: [
+            // [
+            //   { text: 'মোট মূল্যঃ', font: 'Kalpurush', fontSize: 11, bold: true },
+            //   { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.stockReportData.totalPrice}`]},
+            // ],
+            [
+              { text: '(-) ড্যামেজ মূল্যঃ', font: 'Kalpurush', fontSize: 12, bold: true },
+              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.salesReportData.damageAmount}`], bold: true },
+            ],
+            [
+              { text: '(-) এস/আর কমিশনঃ', font: 'Kalpurush', fontSize: 12, bold: true },
+              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.salesReportData.srcommission}`], bold: true, margin: [25, 0, 0, 0]},
+            ],
+            [
+              { text: '(-) ডি/এস/আর কমিশনঃ', font: 'Kalpurush', fontSize: 12, bold: true },
+              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.salesReportData.dsrcommission}`], bold: true, margin: [25, 0, 0, 0]},
+            ],
+            [
+              { text: 'নিট মূল্যঃ', font: 'Kalpurush', fontSize: 12, bold: true },
+              { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.salesReportData.afterDsrCommission}`], bold: true },
+            ],
+          ],
+        },
+        layout: {
+          hLineWidth: function (i: number, node: any) {
+            return i === 0 || i === node.table.body.length ? 0 : 1;
+          },
+          vLineWidth: function () {
+            return 0;
+          },
+          hLineColor: function () {
+            return '#aaa';
+          },
+        },
+        alignment: 'right',
+        margin: [0, 0, -5, 0]
+      },
     ];
 
     this.salesReportData?.reportDetails?.forEach((item, index) => {
@@ -215,6 +260,7 @@ export class DistributionReportComponent {
         { text: `${(item.receiveQuantity || 0) * (item.price || 0)}`, alignment: 'right' },
         { text: `${item.returnQuantity}`, alignment: 'right' },
         { text: `${(item.returnQuantity || 0) * (item.price || 0)}`, alignment: 'right' },
+        { text: `${item.damageQuantity}`, alignment: 'right' },
         { text: `${item.salesQuantity}`, alignment: 'right' },
         { text: [{ text: '৳ ', font: 'Kalpurush' }, `${item.totalSalesPrice}`], alignment: 'right' }
       ]);
@@ -233,7 +279,7 @@ export class DistributionReportComponent {
         {
           table: {
             headerRows: 1,
-            widths: [30, '*', 50, 33, 45, 33, 45, 33, 60],
+            widths: [30, '*', 45, 33, 40, 33, 40, 35, 33, 40],
             dontBreakRows: true,
             body: tableBody,
           },
@@ -252,7 +298,7 @@ export class DistributionReportComponent {
         },
         {
           table: {
-            widths: [30, '*', 50, 33, 45, 33, 45, 33, 60],
+            widths: [30, '*', 45, 33, 40, 33, 40, 35, 33, 40],
             body: [
               [
                 { },
@@ -263,11 +309,16 @@ export class DistributionReportComponent {
                 { },
                 { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.totalReturnPrice}`], bold: true, alignment: 'right' },
                 { },
+                { },
                 { text: [{ text: '৳ ', font: 'Kalpurush' }, `${this.totalSalesAmount}`], bold: true, alignment: 'right' },
               ]
             ]
           },
           layout: 'noBorders'
+        },
+        {
+          columns: invoiceFooter,
+          unbreakable: true
         },
       ],
       footer: function(currentPage: any, pageCount: any){

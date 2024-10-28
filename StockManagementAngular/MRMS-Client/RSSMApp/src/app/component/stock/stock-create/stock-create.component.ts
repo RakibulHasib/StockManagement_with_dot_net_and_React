@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Stock } from 'src/app/models/Stock/Stock';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { ProductService } from 'src/app/services/Product/product.service';
 import { StockService } from 'src/app/services/Stock/stock.service';
 import { NotificationService } from 'src/app/services/Shared/notification.service';
-import { Company } from 'src/app/models/companyenum/company';
 import { DateFormat } from 'src/app/Shared/date-fromat.model';
 import { CompanyService } from 'src/app/service/Company/company.service';
 
@@ -53,7 +52,7 @@ export class StockCreateComponent implements OnInit {
           eja: x.eja ?? 0,
           newProduct: x.newProduct ?? 0,     
           salesQuantity: x.salesQuantity ?? 0,
-          damageQuantity: 0
+          damageQuantity: x.damageQuantity ?? 0
         })
       );
       this.generateFormFields();

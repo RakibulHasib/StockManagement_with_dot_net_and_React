@@ -30,26 +30,6 @@ export class StockService {
     return this.http.post<Stock[]>(`${IceCreamApiUrl}/${endPoint}/InsertStockData/${companyId}?createdDate=${createdDate}`, data);
   }
 
-  updateDamage(stockId: number, damageAmount: number,): Observable<number> {
-    const Qparams={stockId:stockId,damageAmount:damageAmount}
-    const options={params:Qparams}
-    return this.http.put<any>(`${IceCreamApiUrl}/${endPoint}/UpdateDamage`,null,options);
-  }
-
-  getDamageById(stockId: number): Observable<number> {
-    return this.http.get<number>(`${IceCreamApiUrl}/${endPoint}/GetDamageAmountByID?StockId=${stockId}`);
-  }
-
-  updateCommission(stockId: number, commission: number,): Observable<number> {
-    const Qparams={stockId:stockId,commission:commission}
-    const options={params:Qparams}
-    return this.http.put<any>(`${IceCreamApiUrl}/${endPoint}/UpdateSRCommission`,null,options);
-  }
-
-  getCommissionById(stockId: number): Observable<number> {
-    return this.http.get<number>(`${IceCreamApiUrl}/${endPoint}/GetCommissionByID?StockId=${stockId}`);
-  }
-
   checkCreatableStock(companyID: number):Observable<number>{
     return this.http.get<number>(`${IceCreamApiUrl}/${endPoint}/CheckCreatableStock?CompanyID=${companyID}`);
   }

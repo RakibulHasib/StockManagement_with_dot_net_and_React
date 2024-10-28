@@ -44,9 +44,14 @@ export class SalesDistributionService {
     return this.http.post<SalesDistribution[]>(`${IceCreamApiUrl}/${endPoint}/InsertSalesDistributeData`, data);
   }
 
-  deleteDistribution(salesDistributeId: number): Observable<any> {
-    const Qparams={salesDistributeId:salesDistributeId}
-    const options={params:Qparams}
-    return this.http.put<any>(`${IceCreamApiUrl}/${endPoint}/DeleteDistribution`,null,options);
+  getExpenseById(salesDistributeId: number, expenseType: number): Observable<number> {
+    return this.http.get<number>(`${IceCreamApiUrl}/${endPoint}/GetExpenseAmountByID/${salesDistributeId}/${expenseType}`);
   }
+
+  updateExpenseAmount(salesDistributeId: number, amount: number, expenseType: number): Observable<number> {
+    const Qparams={salesDistributeId: salesDistributeId, amount: amount, expenseType: expenseType}
+    const options={params:Qparams}
+    return this.http.put<any>(`${IceCreamApiUrl}/${endPoint}/UpdateExpenseAmount`, null, options);
+  }
+
 }

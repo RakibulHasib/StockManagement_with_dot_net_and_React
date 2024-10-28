@@ -108,7 +108,20 @@ namespace StockManagement.Contexts
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.DamageAmount)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasDefaultValueSql("((0.00))");
+
+                entity.Property(e => e.Dsrcommission)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("DSRCommission");
+
                 entity.Property(e => e.GrandTotal).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Srcommission)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("SRCommission")
+                    .HasDefaultValueSql("((0.00))");
 
                 entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
             });
@@ -145,6 +158,12 @@ namespace StockManagement.Contexts
                 entity.Property(e => e.DamageAmount)
                     .HasColumnType("decimal(18, 2)")
                     .HasDefaultValueSql("((0.00))");
+
+                entity.Property(e => e.DistributionIds).HasMaxLength(500);
+
+                entity.Property(e => e.Dsrcommission)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("DSRCommission");
 
                 entity.Property(e => e.GrandTotalAmount).HasColumnType("decimal(18, 2)");
 

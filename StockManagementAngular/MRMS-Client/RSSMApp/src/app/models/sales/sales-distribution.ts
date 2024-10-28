@@ -10,6 +10,7 @@ export class SalesDistribution {
     public returnQuantity?: number,
     public totalQuantity?: number,
     public salesQuantity?: number,
-    public totalSalesPrice?: number
+    public totalSalesPrice?: number,
+    public damageQuantity?: number
   ) { }
 }

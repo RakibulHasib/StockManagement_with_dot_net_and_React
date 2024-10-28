@@ -4,6 +4,12 @@ export class SalesReportModel {
       public concernPerson?: string,
       public companyName?: string,
       public creationTime?: Date,
+      public damageAmount?: number,
+      public afterDamagePrice?: number,
+      public srcommission?: number,
+      public afterSrCommission?: number,
+      public dsrcommission?: number,
+      public afterDsrCommission?: number,
       public reportDetails?: SalesReportDetailModel[]
     ) { }
   
@@ -22,6 +28,7 @@ export class SalesReportDetailModel {
     public returnPrice?: number,
     public salesQuantity?: number,
     public totalSalesPrice?: number,
+    public damageQuantity?: number,
     public creationTime?: Date
     ) { }
   }

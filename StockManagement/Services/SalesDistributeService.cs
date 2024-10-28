@@ -26,6 +26,13 @@ namespace StockManagement.Services
             ReturnStockIn
         }
 
+        public enum ExpenseType
+        {
+            Damage = 1,
+            SrCommission,
+            DsrCommission
+        }
+
         public async Task<ActionResult<IEnumerable<DailyDistributeDataDTO>>> GetSalesDistributeDataPerDay(int ConcernPersonID, int CompanyId, DateTime StartDate, DateTime EndDate)
         {
             var query = await (from sd in _unitOfWork.SalesDistribute.Queryable.Where(a => a.IsDeleted == 0)
@@ -82,7 +89,8 @@ namespace StockManagement.Services
                     SalesQuantity = item.SalesQuantity ?? 0,
                     TotalSalesPrice = item.TotalSalesPrice,
                     IsDeleted = 0,
-                    CreationTime = distributionTime
+                    CreationTime = distributionTime,
+                    DamageQuantity = item.DamageQuantity ?? 0,
                 };
 
                 distributeDetails.Add(Details);
@@ -206,7 +214,13 @@ namespace StockManagement.Services
                                                  SalesDistributeId = sd.SalesDistributeId,
                                                  ConcernPerson = cp.ConcernPersonName,
                                                  CompanyName = c.CompanyName,
-                                                 CreationTime = sd.CreationTime
+                                                 CreationTime = sd.CreationTime,
+                                                 DamageAmount = sd.DamageAmount,
+                                                 AfterDamagePrice = sd.GrandTotal - sd.DamageAmount,
+                                                 Srcommission = sd.Srcommission,
+                                                 AfterSrCommission = (sd.GrandTotal - sd.DamageAmount) - sd.Srcommission,
+                                                 Dsrcommission = sd.Dsrcommission,
+                                                 AfterDsrCommission = ((sd.GrandTotal - sd.DamageAmount) - sd.Srcommission) - sd.Dsrcommission,
                                              }).FirstOrDefaultAsync();
 
             reportDTO = salesdistributeData;
@@ -228,6 +242,7 @@ namespace StockManagement.Services
                                                            ReturnPrice = si.ReturnQuantity * si.Price,
                                                            SalesQuantity = si.SalesQuantity,
                                                            TotalSalesPrice = si.TotalSalesPrice,
+                                                           DamageQuantity = si.DamageQuantity,
                                                            CreationTime = si.CreationTime
                                                        }).ToListAsync();
 
@@ -284,6 +299,66 @@ namespace StockManagement.Services
                 Today = DateTime.Now,
                 LastDistribute = data
             };
+        }
+
+        public async Task<decimal> GetExpenseAmountByID(int salesDistributeId, ExpenseType expenseType)
+        {
+            decimal amount = 0;
+            var data = await _unitOfWork.SalesDistribute.Queryable
+                            .Where(a => a.SalesDistributeId == salesDistributeId)
+                            .FirstOrDefaultAsync();
+            if (data != null)
+            {
+                switch (expenseType)
+                {
+                    case ExpenseType.Damage:
+                        {
+                            amount = data.DamageAmount;
+                        }
+                        break;
+                    case ExpenseType.SrCommission:
+                        {
+                            amount = data.Srcommission;
+                        }
+                        break;
+                    case ExpenseType.DsrCommission:
+                        {
+                            amount = data.Dsrcommission;
+                        }
+                        break;
+                }
+            }
+            return amount;
+        }
+
+        public async Task<int> UpdateExpenseAmount(int salesDistributeId, decimal amount, ExpenseType expenseType)
+        {
+            int result = 0;
+            var distribute = await _unitOfWork.SalesDistribute.Queryable.Where(a => a.SalesDistributeId == salesDistributeId).FirstOrDefaultAsync();
+            if (distribute != null)
+            {
+                switch (expenseType)
+                {
+                    case ExpenseType.Damage:
+                        {
+                            distribute.DamageAmount = amount;
+                        }
+                        break;
+                    case ExpenseType.SrCommission:
+                        {
+                            distribute.Srcommission = amount;
+                        }
+                        break;
+                    case ExpenseType.DsrCommission:
+                        {
+                            distribute.Dsrcommission = amount;
+                        }
+                        break;
+                }
+                _unitOfWork.SalesDistribute.Update(distribute);
+                result = await _unitOfWork.SaveChangesAsync();
+            }
+            return result;
         }
     }
 }

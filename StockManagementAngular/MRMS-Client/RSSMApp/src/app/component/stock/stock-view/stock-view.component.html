@@ -90,24 +90,7 @@
       <ng-container matColumnDef="actions" class="action">
         <mat-header-cell *matHeaderCellDef mat-sort-header  class="action" >Action</mat-header-cell>
         <mat-cell *matCellDef="let element" class="action">
-
           <button mat-raised-button [routerLink]="['/stock-report',element.stockId]" (click)="stateUpdate()" class="icon-spacing">View</button>
-
-          <button mat-icon-button [matMenuTriggerFor]="stockmenu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #stockmenu="matMenu">
-            <button mat-menu-item (click)="openDamageDialog(element.stockId)">
-              <mat-icon>dialpad</mat-icon>
-              <span>DamageAdd</span>
-            </button>
-            <button mat-menu-item (click)="openCommissionDialog(element.stockId)">
-              <mat-icon>dialpad</mat-icon>
-              <span>CommissionAdd</span>
-            </button>
-          </mat-menu>
-
-
         </mat-cell>
       </ng-container>
 

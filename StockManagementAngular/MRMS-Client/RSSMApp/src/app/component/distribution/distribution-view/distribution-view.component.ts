@@ -11,10 +11,10 @@ import { NotificationService } from 'src/app/services/Shared/notification.servic
 import { StateService } from 'src/app/services/Shared/state.service';
 import { ConcernPersonService } from 'src/app/services/concernPerson/concern-person.service';
 import { SalesDistributionService } from 'src/app/services/sales/sales-distribution.service';
-import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
-import { throwError } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DistributionStatusComponent } from '../../shared/distribution-status/distribution-status.component';
+import { ExpenseType } from 'src/app/enums/distributor-status.enum';
+import { ExpenseModalComponent } from '../../modal/expense-modal/expense-modal.component';
 
 @Component({
   selector: 'app-distribution-view',
@@ -37,6 +37,7 @@ export class DistributionViewComponent {
   selectedConcernPerson: number = 0;
   selectedCompany: number = 0;
   distibutionId : number = 0;
+  expenseType = ExpenseType;
 
   onConcernPersonDropdownSelectionChange(selectedConcernPerson: number) {
     this.selectedConcernPerson = selectedConcernPerson;
@@ -175,26 +176,28 @@ export class DistributionViewComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  
+  openExpenseDialog(salesDistributeId: any, expenseType: number){
+    const dialogRef = this._dialog.open(ExpenseModalComponent,{
+      enterAnimationDuration: '400ms',
+      data:{
+        salesDistributeId: salesDistributeId,
+        expenseType: expenseType
+      }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateExpenseAmount(salesDistributeId, Number(result), expenseType);
+    });
+  }
 
-  confirmDelete(salesDistributeId: any) {
-    this._dialog.open(ConfirmDialogComponent, {
-      width: '450px',
-      enterAnimationDuration: '400ms'
-    }).afterClosed()
-      .subscribe(result => {
-        if (result) {
-          this.salesService.deleteDistribution(salesDistributeId)
-            .subscribe({
-              next: r => {
-                this._notificationSvc.message('Distribution Deleted Successfully', 'DISMISS');
-                 this.dataSource.data = this.dataSource.data.filter(c => c.salesDistributeId != salesDistributeId);
-              },
-              error: err => {
-                this._notificationSvc.message('Failed to delete data', 'DISMISS');
-                throwError(() => err);
-              }
-            })
-        }
-      })
+  updateExpenseAmount(salesDistributeId : number, amount : number, expenseType: number) {
+    if (salesDistributeId && amount && expenseType) {
+      this.salesService.updateExpenseAmount(salesDistributeId, amount, expenseType)
+        .subscribe(data => {
+          this._notificationSvc.message("Successfully Updated", "DISMISS");
+        }, err => {
+          this._notificationSvc.message("Failed to update data", "DISMISS");
+        });
+    }
   }
 }

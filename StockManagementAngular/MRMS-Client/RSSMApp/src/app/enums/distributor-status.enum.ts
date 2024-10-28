@@ -3,3 +3,10 @@ export enum DistributorStatus{
     Created,
     Complete
 }
+
+export enum ExpenseType
+{
+    Damage = 1,
+    SrCommission,
+    DsrCommission
+}

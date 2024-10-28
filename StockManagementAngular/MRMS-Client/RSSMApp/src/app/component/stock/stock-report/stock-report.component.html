@@ -70,8 +70,16 @@
       <td style="border-bottom-style: hidden;">{{stockReportData.srcommission}}</td>
     </tr>
     <tr style="font-weight: bold;" *ngIf="stockReportData">
+      <td colspan="11" style="text-align:right;border-bottom-style: hidden;">মোট মূল্যঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden;">{{stockReportData.afterSrCommission}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="stockReportData">
+      <td colspan="11" style="text-align:right;border-bottom-style: hidden;">(-)&nbsp;ডি/এস/আর কমিশনঃ &nbsp;</td>
+      <td style="border-bottom-style: hidden;">{{stockReportData.dsrcommission}}</td>
+    </tr>
+    <tr style="font-weight: bold;" *ngIf="stockReportData">
       <td colspan="11" style="text-align:right;">নিট মূল্যঃ &nbsp;</td>
-      <td style="text-decoration: underline double; text-decoration-color: black;">{{stockReportData.afterSrCommission}}</td>
+      <td style="text-decoration: underline double; text-decoration-color: black;">{{stockReportData.afterDsrCommission}}</td>
     </tr>
   </table>
 

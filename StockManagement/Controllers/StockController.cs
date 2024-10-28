@@ -35,34 +35,6 @@ public class StockController : BaseController<StockController>
     }
 
     [JwtAuthorize]
-    [HttpPut("UpdateDamage")]
-    public async Task<ActionResult<int>> UpdateDamageAmount(int StockId, decimal DamageAmount)
-    {
-        return Ok(await _stockService.UpdateDamageAmount(StockId, DamageAmount));
-    }
-
-    [JwtAuthorize]
-    [HttpPut("UpdateSRCommission")]
-    public async Task<ActionResult<int>> UpdateSRCommission(int StockId, decimal Commission)
-    {
-        return Ok(await _stockService.UpdateSRCommission(StockId, Commission));
-    }
-
-    [JwtAuthorize]
-    [HttpGet("GetDamageAmountByID")]
-    public async Task<ActionResult<decimal>> GetDamageAmountByID(int StockId)
-    {
-        return await _stockService.GetDamageAmountByID(StockId);
-    }
-
-    [JwtAuthorize]
-    [HttpGet("GetCommissionByID")]
-    public async Task<ActionResult<decimal>> GetCommissionByID(int StockId)
-    {
-        return await _stockService.GetCommissionByID(StockId);
-    }
-
-    [JwtAuthorize]
     [HttpGet("CheckCreatableStock")]
     public async Task<ActionResult<int>> CheckCreatableStock(int CompanyID)
     {

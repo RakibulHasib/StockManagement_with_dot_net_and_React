@@ -9,8 +9,6 @@ import { Dailydatadbmodel } from '../../../models/DailyDataModel/dailydatadbmode
 import { StockService } from '../../../services/Stock/stock.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { DamageaddComponent } from '../../modal/damageadd/damageadd.component';
-import { CommisionaddComponent } from '../../modal/commisionadd/commisionadd.component';
 import { CompanyService } from 'src/app/service/Company/company.service';
 import { Company } from 'src/app/models/company/company';
 import { StateService } from 'src/app/services/Shared/state.service';
@@ -143,53 +141,6 @@ export class StockViewComponent implements OnInit, OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  
-  openDamageDialog(stockId: any){
-    const dialogRef = this._dialog.open(DamageaddComponent,{
-      enterAnimationDuration: '400ms',
-      data:{
-        stockId:stockId
-      }
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      this.UpdateDamage(stockId, Number(result));
-    });
-  }
-
-  UpdateDamage(stockId : number,amount : number) {
-    if (stockId && amount) {
-      this.dailyDataSvc.updateDamage(stockId, amount)
-        .subscribe(data => {
-          this._notificationSvc.message("Successfully Updated", "DISMISS");
-        }, err => {
-          this._notificationSvc.message("Failed to update data", "DISMISS");
-        });
-    }
-  }
-
-  openCommissionDialog(stockId: any){
-    const dialogRef = this._dialog.open(CommisionaddComponent,{
-      enterAnimationDuration: '400ms',
-      data:{
-        stockId:stockId
-      }
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      this.UpdateCommission(stockId, Number(result));
-    });
-  }
-
-  UpdateCommission(stockId : number,commission : number) {
-    if (stockId && commission) {
-      this.dailyDataSvc.updateCommission(stockId, commission)
-        .subscribe(data => {
-          this._notificationSvc.message("Successfully Updated", "DISMISS");
-        }, err => {
-          this._notificationSvc.message("Failed to update data", "DISMISS");
-        });
-    }
   }
 
   openDistributeStatus(){

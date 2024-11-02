@@ -36,7 +36,7 @@ public class StockService
     public async Task<ActionResult<int>> InsertStockData(int companyId, DateTime createdDate, List<StockDTO> savoyIceCreamVM)
     {
         int result = 0;
-        //var transaction = await _unitOfWork.BeginTransactionAsync();
+        var transaction = await _unitOfWork.BeginTransactionAsync();
 
         try
         {
@@ -111,11 +111,11 @@ public class StockService
                 _unitOfWork.Product.Update(item);
             }
             await _unitOfWork.SaveChangesAsync();
-            //await transaction.CommitAsync();
+            await transaction.CommitAsync();
         }
         catch (Exception)
         {
-            //await transaction.RollbackAsync();
+            await transaction.RollbackAsync();
             throw new InvalidOperationException("Failed to insert");
         }
         

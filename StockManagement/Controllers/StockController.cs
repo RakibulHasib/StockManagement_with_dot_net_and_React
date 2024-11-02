@@ -14,7 +14,7 @@ public class StockController : BaseController<StockController>
         _stockService = stockService;
     }
 
-    [Transaction]
+    [JwtAuthorize]
     [HttpPost("InsertStockData/{companyId}")]
     public async Task<ActionResult<int>> InsertStockData([FromRoute] int companyId, DateTime createdDate, List<StockDTO> savoyIceCreamVM)
     {

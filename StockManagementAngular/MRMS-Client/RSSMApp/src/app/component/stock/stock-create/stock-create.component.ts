@@ -236,8 +236,12 @@ export class StockCreateComponent implements OnInit {
               validation: {
                 messages:{required:" "}
               },
-              expressions: {
-                'model.totalAmount': 'parseInt(model.price) * (model.salesQuantity ? parseInt(model.salesQuantity) : 0)',
+              hooks: {
+                onInit: (field: FormlyFieldConfig) => {
+                  const price = field.form?.get('price')?.value || 0;
+                  const salesQ = field.form?.get('salesQuantity')?.value || 0;
+                  field.formControl?.setValue(price * salesQ);
+                }
               }
               
             },

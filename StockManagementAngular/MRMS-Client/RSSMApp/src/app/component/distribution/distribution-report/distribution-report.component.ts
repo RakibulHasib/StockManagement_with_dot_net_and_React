@@ -247,7 +247,7 @@ export class DistributionReportComponent {
           },
         },
         alignment: 'right',
-        margin: [0, 0, -5, 0]
+        margin: [0, 0, 0, 0]
       },
     ];
 
@@ -314,6 +314,7 @@ export class DistributionReportComponent {
               ]
             ]
           },
+          margin: [0, 0, 0, 0],
           layout: 'noBorders'
         },
         {
